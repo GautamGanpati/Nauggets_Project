@@ -11,11 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List<Widget> _widgetOptions = <Widget>[
+  final screens = [
     Text(
       '1',
       style: optionStyle,
@@ -52,56 +52,42 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     Text('Signed in'),
-
-        //     SizedBox(height: 5,),
-        //     MaterialButton(
-        //       onPressed: () {
-        //         FirebaseAuth.instance.signOut();
-        //         },
-        //         color: Colors.green,
-        //         child: Text('Sign Out',),textColor: Colors.white,
-        //         )
-        //         ]
-        // )
+        child: screens.elementAt(selectedIndex),
       ),
-      bottomNavigationBar: GNav(
-          backgroundColor: Colors.white,
-          iconSize: 25,
-          gap: 10,
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
-          tabs: const [
-            GButton(
-              icon: Icons.auto_graph_sharp,
-              iconColor: Colors.black,
-            ),
-            GButton(
-              icon: Icons.attach_money_outlined,
-              iconColor: Colors.black,
-            ),
-            GButton(
-              icon: Icons.shield,
-              iconColor: Colors.black,
-            ),
-            GButton(
-              icon: Icons.person,
-              iconColor: Colors.black,
-            ),
-            GButton(
-              icon: Icons.settings,
-              iconColor: Colors.black,
-            ),
-          ],
-          selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          }),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) => setState(() {
+          selectedIndex = index;
+        }),
+        backgroundColor: Colors.blue,
+        iconSize: 30.0,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Colors.deepPurple[700],
+        unselectedItemColor: Colors.black54,
+        items: const [
+          BottomNavigationBarItem(
+            label: '1',
+            icon: Icon(Icons.auto_graph_sharp),
+          ),
+          BottomNavigationBarItem(
+            label: '2',
+            icon: Icon(Icons.attach_money_outlined),
+          ),
+          BottomNavigationBarItem(
+            label: '3',
+            icon: Icon(Icons.shield),
+          ),
+          BottomNavigationBarItem(
+            label: '4',
+            icon: Icon(Icons.person),
+          ),
+          BottomNavigationBarItem(
+            label: '5',
+            icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
     );
   }
 }
